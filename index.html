@@ -1,0 +1,1958 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pachy — Limpieza Profesional en Quito</title>
+<meta name="description" content="Empresa de limpieza profesional en Quito. Hogares, oficinas y negocios. Servicio confiable, puntual y de alta calidad en toda la ciudad.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ─────────────────────────────────────────
+   RESET & TOKENS
+───────────────────────────────────────── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:16px; }
+
+:root {
+  --blue:      #1560BD;
+  --blue-mid:  #1A72D8;
+  --blue-light:#EBF3FF;
+  --orange:    #F5A623;
+  --orange-dk: #E09010;
+  --dark:      #0D1B2A;
+  --mid:       #3D5166;
+  --muted:     #8FA3B8;
+  --bg:        #F7F9FC;
+  --white:     #FFFFFF;
+  --radius:    20px;
+  --shadow:    0 24px 64px rgba(21,96,189,.12);
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--white);
+  color: var(--dark);
+  overflow-x: hidden;
+}
+
+/* ─────────────────────────────────────────
+   SCROLL REVEAL
+───────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(52px);
+  transition: opacity .75s cubic-bezier(.22,1,.36,1),
+              transform .75s cubic-bezier(.22,1,.36,1);
+}
+.reveal.left  { transform: translateX(-52px); }
+.reveal.right { transform: translateX(52px); }
+.reveal.scale { transform: scale(.90); }
+.reveal.visible { opacity:1; transform:none; }
+.reveal.d1 { transition-delay:.1s; }
+.reveal.d2 { transition-delay:.2s; }
+.reveal.d3 { transition-delay:.3s; }
+.reveal.d4 { transition-delay:.4s; }
+.reveal.d5 { transition-delay:.5s; }
+
+/* ─────────────────────────────────────────
+   NAV
+───────────────────────────────────────── */
+nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 6%;
+  transition: background .4s, box-shadow .4s;
+}
+nav.scrolled {
+  background: rgba(255,255,255,.96);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 1px 0 rgba(0,0,0,.07);
+}
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.logo img {
+  height: 58px;
+  width: auto;
+  object-fit: contain;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.4rem;
+  list-style: none;
+  align-items: center;
+}
+.nav-links a {
+  text-decoration: none;
+  font-size: .9rem;
+  font-weight: 600;
+  color: rgba(255,255,255,.85);
+  transition: color .2s;
+  letter-spacing: .01em;
+}
+nav.scrolled .nav-links a { color: var(--mid); }
+.nav-links a:hover { color: var(--orange) !important; }
+.nav-btn {
+  background: var(--orange) !important;
+  color: var(--white) !important;
+  padding: .65rem 1.6rem;
+  border-radius: 50px;
+  font-weight: 700 !important;
+  transition: transform .2s, box-shadow .2s !important;
+  box-shadow: 0 4px 16px rgba(245,166,35,.35);
+}
+.nav-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(245,166,35,.5) !important;
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px;
+  z-index: 910;
+}
+.hamburger span {
+  display: block;
+  width: 26px;
+  height: 2.5px;
+  background: var(--white);
+  border-radius: 4px;
+  transition: all .3s;
+}
+nav.scrolled .hamburger span { background: var(--dark); }
+.hamburger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+/* Mobile nav overlay */
+.nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--dark);
+  z-index: 850;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+.nav-overlay.open { display: flex; }
+.nav-overlay a {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--white);
+  text-decoration: none;
+  transition: color .2s;
+}
+.nav-overlay a:hover { color: var(--orange); }
+.nav-overlay .nav-close {
+  position: absolute;
+  top: 1.5rem; right: 6%;
+  font-size: 2rem;
+  color: rgba(255,255,255,.5);
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+/* ─────────────────────────────────────────
+   HERO
+───────────────────────────────────────── */
+#hero {
+  min-height: 100vh;
+  background: linear-gradient(145deg, #091422 0%, #1560BD 55%, #1A8CDD 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 9rem 6% 7rem;
+  position: relative;
+  overflow: hidden;
+}
+.geo {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.geo-1 {
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(245,166,35,.2) 0%, transparent 68%);
+  top: -260px; right: -260px;
+  animation: geoFloat 12s ease-in-out infinite;
+}
+.geo-2 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(255,255,255,.06) 0%, transparent 70%);
+  bottom: -180px; left: -180px;
+  animation: geoFloat 16s ease-in-out infinite reverse;
+}
+.geo-3 {
+  width: 340px; height: 340px;
+  background: radial-gradient(circle, rgba(26,140,221,.35) 0%, transparent 70%);
+  top: 30%; left: 8%;
+  animation: geoFloat 10s ease-in-out infinite 2s;
+}
+@keyframes geoFloat {
+  0%,100% { transform: translate(0,0); }
+  50%      { transform: translate(20px, -20px); }
+}
+
+#hero::before {
+  content:'';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: 52px 52px;
+}
+
+/* Particles */
+.particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.particle {
+  position: absolute;
+  width: 3px; height: 3px;
+  background: rgba(245,166,35,.6);
+  border-radius: 50%;
+  animation: particleDrift linear infinite;
+}
+@keyframes particleDrift {
+  0%   { transform: translateY(100vh) translateX(0); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateY(-20vh) translateX(60px); opacity: 0; }
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 860px;
+  width: 100%;
+}
+.hero-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.22);
+  color: rgba(255,255,255,.92);
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: .5rem 1.3rem;
+  border-radius: 50px;
+  margin-bottom: 2rem;
+  animation: chipIn .8s ease both .2s;
+}
+@keyframes chipIn {
+  from { opacity:0; transform:translateY(-18px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.hero-chip span { width:7px; height:7px; background:var(--orange); border-radius:50%; animation: chipPulse 1.5s ease infinite; }
+@keyframes chipPulse {
+  0%,100% { transform:scale(1); opacity:1; }
+  50%     { transform:scale(1.5); opacity:.7; }
+}
+
+#hero h1 {
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(3rem, 6.5vw, 5.4rem);
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.06;
+  letter-spacing: -.04em;
+  margin-bottom: 1.6rem;
+  animation: heroTitle .9s ease both .35s;
+}
+@keyframes heroTitle {
+  from { opacity:0; transform:translateY(36px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+#hero h1 em { font-style:normal; color:var(--orange); }
+
+#hero p {
+  color: rgba(255,255,255,.75);
+  font-size: clamp(1rem, 1.8vw, 1.18rem);
+  line-height: 1.8;
+  max-width: 580px;
+  margin: 0 auto 2.8rem;
+  font-weight: 400;
+  animation: heroTitle .9s ease both .5s;
+}
+.hero-ctas {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: heroTitle .9s ease both .65s;
+}
+.btn-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: var(--orange);
+  color: var(--white);
+  padding: 1.05rem 2.4rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  box-shadow: 0 10px 36px rgba(245,166,35,.45);
+  transition: transform .25s, box-shadow .25s;
+}
+.btn-main:hover { transform:translateY(-4px); box-shadow:0 18px 50px rgba(245,166,35,.55); }
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: rgba(255,255,255,.1);
+  border: 1.5px solid rgba(255,255,255,.32);
+  color: var(--white);
+  padding: 1.05rem 2.4rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: background .2s, transform .25s;
+}
+.btn-ghost:hover { background:rgba(255,255,255,.2); transform:translateY(-4px); }
+
+/* Stats */
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  margin-top: 4.5rem;
+  animation: heroTitle .9s ease both .8s;
+  flex-wrap: nowrap;
+}
+.stat { text-align: center; flex-shrink: 0; }
+.stat strong {
+  display: block;
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: .3rem;
+}
+.stat span {
+  font-size: clamp(.65rem,.9vw,.8rem);
+  color: rgba(255,255,255,.55);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  white-space: nowrap;
+}
+.stat-divider {
+  width: 1px;
+  height: 44px;
+  background: rgba(255,255,255,.16);
+  flex-shrink: 0;
+}
+
+/* Scroll hint */
+.scroll-hint {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,.38);
+  font-size: .72rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  animation: heroTitle 1s ease both 1.2s;
+}
+.scroll-line {
+  width: 1px; height: 50px;
+  background: linear-gradient(var(--orange), transparent);
+  animation: scrollLine 2.2s ease infinite;
+}
+@keyframes scrollLine {
+  0%   { transform:scaleY(0); transform-origin:top; opacity:1; }
+  50%  { transform:scaleY(1); transform-origin:top; opacity:1; }
+  100% { transform:scaleY(1); transform-origin:bottom; opacity:0; }
+}
+
+/* ─────────────────────────────────────────
+   SOAP BUBBLES
+───────────────────────────────────────── */
+.bubbles-wrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+.soap-bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 28%,
+    rgba(255,255,255,.48) 0%,
+    rgba(255,255,255,.12) 45%,
+    transparent 68%);
+  border: 1.5px solid rgba(255,255,255,.28);
+  animation: soapFloat linear infinite;
+  bottom: -120px;
+}
+@keyframes soapFloat {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  6%   { opacity: 1; }
+  50%  { transform: translateY(-55vh) translateX(25px); }
+  94%  { opacity: .7; }
+  100% { transform: translateY(-115vh) translateX(-15px); opacity: 0; }
+}
+
+/* ─────────────────────────────────────────
+   VIDEO SECTION
+───────────────────────────────────────── */
+#video-section {
+  padding: 8rem 6%;
+  background: linear-gradient(145deg, #091422 0%, #0D3270 100%);
+  position: relative;
+  overflow: hidden;
+}
+#video-section::before {
+  content:'';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
+  background-size: 52px 52px;
+}
+.video-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+  max-width: 960px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+/* Local video */
+.local-video-wrap {
+  max-width: 700px;
+  margin: 0 auto;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,.5);
+  background: #000;
+  border: 2px solid rgba(255,255,255,.1);
+}
+.local-video-wrap video {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 75vh;
+  object-fit: contain;
+  background: #000;
+}
+.video-text { color: var(--white); }
+.video-text .eyebrow { color: rgba(255,255,255,.6); }
+.video-text h2.headline { color: var(--white); }
+.video-text h2.headline em { color: var(--orange); }
+.video-text .lead { color: rgba(255,255,255,.55); margin: 1.2rem 0 2rem; }
+.video-badge-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.vbadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.15);
+  color: rgba(255,255,255,.8);
+  padding: .55rem 1.1rem;
+  border-radius: 50px;
+  font-size: .83rem;
+  font-weight: 600;
+}
+
+/* ─────────────────────────────────────────
+   TESTIMONIALS SLIDER
+───────────────────────────────────────── */
+.test-slider-wrap {
+  position: relative;
+  max-width: 900px;
+  margin: 2rem auto 0;
+  user-select: none;
+}
+.test-slider-track {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  align-items: flex-start;
+  padding-bottom: .5rem;
+}
+.test-slider-track::-webkit-scrollbar { display: none; }
+.test-slide { scroll-snap-align: start; }
+.test-slide {
+  flex: 0 0 280px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(21,96,189,.12);
+  transition: transform .3s;
+  cursor: pointer;
+  align-self: flex-start;
+}
+.test-slide:hover { transform: translateY(-6px); }
+.test-slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.test-slide.wide {
+  flex: 0 0 340px;
+}
+.slider-arrows {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.8rem;
+}
+.slider-arrow {
+  width: 48px; height: 48px;
+  background: var(--blue);
+  color: var(--white);
+  border: none;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s, transform .2s;
+  box-shadow: 0 4px 16px rgba(21,96,189,.3);
+}
+.slider-arrow:hover { background: var(--orange); transform: scale(1.1); }
+.slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: .5rem;
+  margin-top: 1rem;
+}
+.slider-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #CBD8E8;
+  cursor: pointer;
+  transition: background .2s, transform .2s;
+}
+.slider-dot.active { background: var(--blue); transform: scale(1.3); }
+
+/* ─────────────────────────────────────────
+   UTILITY
+───────────────────────────────────────── */
+.section-wrap { max-width: 1160px; margin: 0 auto; }
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 1rem;
+}
+.eyebrow::before {
+  content:'';
+  width: 22px; height: 3px;
+  background: var(--orange);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+h2.headline {
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(2.1rem, 3.8vw, 3.1rem);
+  font-weight: 900;
+  letter-spacing: -.04em;
+  line-height: 1.1;
+  color: var(--dark);
+}
+h2.headline em { font-style:normal; color:var(--blue); }
+h2.headline.light { color: var(--white); }
+h2.headline.light em { color: var(--orange); }
+.lead {
+  font-size: 1.08rem;
+  color: var(--muted);
+  line-height: 1.8;
+  font-weight: 400;
+}
+
+/* ─────────────────────────────────────────
+   ABOUT
+───────────────────────────────────────── */
+#about {
+  padding: 8rem 6%;
+  background: var(--bg);
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+}
+.about-visual { position: relative; }
+
+.about-card-main {
+  border-radius: 28px;
+  height: 500px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+.about-card-main img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform .6s ease;
+}
+.about-card-main:hover img { transform: scale(1.04); }
+.about-card-main::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(13,27,42,.55) 100%);
+  z-index: 1;
+}
+.about-card-tag {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  z-index: 2;
+  background: rgba(255,255,255,.12);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,.25);
+  color: var(--white);
+  border-radius: 12px;
+  padding: .7rem 1.2rem;
+  font-weight: 700;
+  font-size: .85rem;
+  letter-spacing: .04em;
+}
+
+.about-badge {
+  position: absolute;
+  bottom: -22px;
+  right: -22px;
+  background: var(--orange);
+  color: var(--white);
+  border-radius: 20px;
+  padding: 1.3rem 1.6rem;
+  box-shadow: 0 14px 36px rgba(245,166,35,.48);
+  text-align: center;
+  min-width: 130px;
+  z-index: 3;
+}
+.about-badge strong {
+  font-family: 'Nunito', sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  display: block;
+  line-height: 1;
+}
+.about-badge span {
+  font-size: .75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  opacity: .88;
+}
+
+.about-text { padding-top: 1rem; }
+.about-text .lead { margin: 1.4rem 0 2.4rem; max-width: 490px; font-size: 1.08rem; }
+
+.about-pillars {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+.pillar {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 1.3rem;
+  border-top: 3px solid var(--blue);
+  box-shadow: 0 4px 20px rgba(0,0,0,.05);
+  transition: transform .25s, box-shadow .25s;
+}
+.pillar:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(21,96,189,.1); }
+.pillar-ico { font-size: 1.5rem; margin-bottom: .55rem; }
+.pillar h4 {
+  font-size: .78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--blue);
+  margin-bottom: .35rem;
+}
+.pillar p { font-size: .83rem; color: var(--muted); line-height: 1.55; }
+
+/* Workers strip */
+.about-workers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.worker-card {
+  border-radius: 18px;
+  overflow: hidden;
+  height: 200px;
+  position: relative;
+  box-shadow: 0 8px 28px rgba(0,0,0,.1);
+}
+.worker-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform .5s ease;
+}
+.worker-card:hover img { transform: scale(1.06); }
+.worker-card-label {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 1.5rem .9rem .7rem;
+  background: linear-gradient(transparent, rgba(13,27,42,.7));
+  color: var(--white);
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+/* ─────────────────────────────────────────
+   SERVICES
+───────────────────────────────────────── */
+#services {
+  padding: 8rem 6%;
+  background: var(--white);
+}
+.services-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 4rem;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.services-head .lead { max-width: 340px; margin-top: .9rem; }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+}
+.svc-card {
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s;
+  cursor: default;
+  border: 1.5px solid transparent;
+}
+.svc-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #0D3F80 0%, var(--blue-mid) 100%);
+  opacity: 0;
+  transition: opacity .35s;
+}
+.svc-card:hover {
+  transform: translateY(-9px);
+  box-shadow: 0 28px 60px rgba(21,96,189,.2);
+  border-color: var(--blue);
+}
+.svc-card:hover::before { opacity: 1; }
+.svc-card:hover .svc-ico,
+.svc-card:hover h3,
+.svc-card:hover p,
+.svc-card:hover .svc-link { color: var(--white); }
+.svc-card:hover .svc-ico { background: rgba(255,255,255,.15); }
+
+.svc-ico {
+  width: 54px; height: 54px;
+  background: var(--blue-light);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 1.2rem;
+  position: relative;
+  z-index: 1;
+  transition: background .3s;
+}
+.svc-card h3 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  margin-bottom: .5rem;
+  position: relative;
+  z-index: 1;
+  transition: color .3s;
+}
+.svc-card p {
+  font-size: .85rem;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: 1.2rem;
+  position: relative;
+  z-index: 1;
+  transition: color .3s;
+}
+.svc-link {
+  font-size: .83rem;
+  font-weight: 700;
+  color: var(--blue);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+  z-index: 1;
+  transition: color .3s;
+}
+
+/* ─────────────────────────────────────────
+   PROCESS
+───────────────────────────────────────── */
+#process {
+  padding: 8rem 6%;
+  background: var(--dark);
+  position: relative;
+  overflow: hidden;
+}
+#process::before {
+  content:'';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+.process-head { text-align:center; margin-bottom: 5rem; }
+.process-head .lead { color:rgba(255,255,255,.5); max-width:480px; margin:1rem auto 0; }
+
+.process-track {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  position: relative;
+  max-width: 1020px;
+  margin: 0 auto;
+}
+.process-track::before {
+  content: '';
+  position: absolute;
+  top: 32px;
+  left: 10%; right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--orange), var(--blue));
+  z-index: 0;
+}
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  padding: 0 .5rem;
+}
+.step-circle {
+  width: 65px; height: 65px;
+  border-radius: 50%;
+  background: var(--dark);
+  border: 2px solid rgba(255,255,255,.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: rgba(255,255,255,.3);
+  margin-bottom: 1.4rem;
+  transition: all .4s;
+}
+.step:hover .step-circle {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: var(--white);
+  box-shadow: 0 0 0 14px rgba(245,166,35,.14);
+}
+.step h4 {
+  font-family: 'Nunito', sans-serif;
+  font-size: .95rem;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: .4rem;
+}
+.step p {
+  font-size: .8rem;
+  color: rgba(255,255,255,.42);
+  line-height: 1.55;
+}
+
+/* ─────────────────────────────────────────
+   GALLERY
+───────────────────────────────────────── */
+#gallery {
+  padding: 8rem 6%;
+  background: var(--bg);
+}
+.gallery-head { margin-bottom: 3rem; }
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 250px 250px;
+  gap: 1.2rem;
+}
+.gal-item {
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: transform .4s cubic-bezier(.22,1,.36,1);
+  cursor: default;
+  background: var(--blue-light);
+}
+.gal-item:hover { transform: scale(1.025); }
+.gal-item:nth-child(1) { grid-row: span 2; }
+
+.gal-item img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform .5s cubic-bezier(.22,1,.36,1);
+}
+.gal-item:hover img { transform: scale(1.07); }
+
+.gal-label {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 2.5rem 1.3rem 1rem;
+  background: linear-gradient(transparent, rgba(9,20,34,.72));
+  color: var(--white);
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  z-index: 1;
+}
+.gal-item-placeholder {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--blue-light), #c8defc);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+}
+
+/* ─────────────────────────────────────────
+   TESTIMONIALS
+───────────────────────────────────────── */
+#testimonials {
+  padding: 8rem 6%;
+  background: var(--white);
+}
+.test-head { text-align:center; margin-bottom:4rem; }
+.test-head .lead { max-width:440px; margin:.9rem auto 0; }
+
+.test-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+.test-card {
+  border-radius: var(--radius);
+  padding: 2rem;
+  background: var(--bg);
+  border: 1.5px solid #E4EDF6;
+  transition: transform .3s, box-shadow .3s;
+}
+.test-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 22px 54px rgba(21,96,189,.11);
+}
+.stars { color: var(--orange); font-size: 1rem; letter-spacing: 3px; margin-bottom: 1rem; }
+.test-card blockquote {
+  font-size: .95rem;
+  color: var(--mid);
+  line-height: 1.75;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  border: none;
+}
+.test-author { display:flex; align-items:center; gap:12px; }
+.ava {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue), var(--blue-mid));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-weight: 800;
+  font-size: .85rem;
+  flex-shrink: 0;
+}
+.test-author strong { font-size:.9rem; font-weight:700; display:block; }
+.test-author span { font-size:.78rem; color:var(--muted); }
+
+/* ─────────────────────────────────────────
+   CONTACT
+───────────────────────────────────────── */
+#contact {
+  padding: 8rem 6%;
+  background: var(--bg);
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 5rem;
+  align-items: start;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+.contact-info .lead { margin: 1.3rem 0 2.5rem; max-width: 400px; }
+.info-rows { display:flex; flex-direction:column; gap:.8rem; }
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 1rem 1.2rem;
+  background: var(--white);
+  border-radius: 14px;
+  box-shadow: 0 2px 14px rgba(0,0,0,.05);
+}
+.info-ico {
+  width: 46px; height: 46px;
+  background: var(--blue-light);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+.info-row strong {
+  display: block;
+  font-size: .75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--muted);
+  margin-bottom: .15rem;
+}
+.info-row span { font-size: .97rem; font-weight: 700; }
+.wa-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #25D366;
+  color: var(--white);
+  padding: 1.05rem 2.1rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  margin-top: 1.8rem;
+  box-shadow: 0 8px 28px rgba(37,211,102,.38);
+  transition: transform .2s, box-shadow .2s;
+}
+.wa-cta:hover { transform:translateY(-3px); box-shadow:0 14px 40px rgba(37,211,102,.48); }
+
+/* Form */
+.form-box {
+  background: var(--white);
+  border-radius: 28px;
+  padding: 2.8rem;
+  box-shadow: 0 14px 52px rgba(21,96,189,.11);
+}
+.form-box h3 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin-bottom: .4rem;
+}
+.form-box .sub { font-size:.86rem; color:var(--muted); margin-bottom:2rem; }
+.fg { margin-bottom: 1.1rem; }
+.fg label {
+  display: block;
+  font-size: .73rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+  color: var(--muted);
+  margin-bottom: .4rem;
+}
+.fg input, .fg select, .fg textarea {
+  width: 100%;
+  padding: .9rem 1rem;
+  border: 1.5px solid #DDE8F3;
+  border-radius: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .97rem;
+  color: var(--dark);
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+  background: var(--bg);
+}
+.fg input:focus, .fg select:focus, .fg textarea:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(21,96,189,.09);
+  background: var(--white);
+}
+.fg textarea { min-height:92px; resize:vertical; }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:.8rem; }
+.submit-btn {
+  width: 100%;
+  padding: 1.05rem;
+  background: var(--blue);
+  color: var(--white);
+  border: none;
+  border-radius: 50px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  margin-top: .5rem;
+  transition: background .2s, transform .2s, box-shadow .2s;
+  box-shadow: 0 8px 28px rgba(21,96,189,.32);
+}
+.submit-btn:hover {
+  background: #0D4FA0;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(21,96,189,.42);
+}
+
+/* ─────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────── */
+footer {
+  background: var(--dark);
+  padding: 4.5rem 6% 2rem;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem;
+  max-width: 1040px;
+  margin: 0 auto 3rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.footer-brand .logo-ft {
+  display: block;
+  margin-bottom: 1rem;
+}
+.footer-brand .logo-ft img {
+  height: 62px;
+  width: auto;
+  object-fit: contain;
+}
+.footer-brand p { font-size:.88rem; color:rgba(255,255,255,.4); line-height:1.75; }
+.socials { display:flex; gap:.7rem; margin-top:1.5rem; }
+.soc {
+  width: 40px; height: 40px;
+  background: rgba(255,255,255,.07);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: background .2s, transform .2s;
+}
+.soc:hover { background: var(--blue); transform:translateY(-2px); }
+.footer-col h5 {
+  font-size: .74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--orange);
+  margin-bottom: 1.3rem;
+}
+.footer-col ul { list-style:none; }
+.footer-col li { margin-bottom: .6rem; }
+.footer-col a { color:rgba(255,255,255,.45); text-decoration:none; font-size:.88rem; font-weight:500; transition:color .2s; }
+.footer-col a:hover { color:var(--white); }
+.footer-bottom {
+  text-align: center;
+  color: rgba(255,255,255,.2);
+  font-size: .8rem;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+.footer-bottom strong { color: var(--orange); }
+
+
+/* ─────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────── */
+
+/* ── Tablet grande (≤1024px) ── */
+@media (max-width:1024px) {
+  .services-grid { grid-template-columns:1fr 1fr; }
+  .about-grid { gap:4rem; }
+}
+
+/* ── Tablet (≤900px) ── */
+@media (max-width:900px) {
+  /* Nav */
+  .nav-links { display:none; }
+  .hamburger { display:flex; }
+
+  /* Secciones: reducir padding */
+  #about, #services, #process, #gallery,
+  #testimonials, #contact, #video-section {
+    padding: 6rem 5%;
+  }
+
+  /* About */
+  .about-grid { grid-template-columns:1fr; gap:3rem; }
+  .about-card-main { height:360px; }
+  .about-badge { bottom:-16px; right:-8px; }
+  .about-workers { display:none; }
+  .about-pillars { grid-template-columns:1fr 1fr; }
+
+  /* Gallery */
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: auto !important;
+  }
+  .gal-item { height:220px; }
+  .gal-item:nth-child(1) { grid-row:span 1 !important; }
+
+  /* Testimonials */
+  .test-grid { grid-template-columns:1fr 1fr !important; }
+
+  /* Contact */
+  .contact-grid { grid-template-columns:1fr; gap:3rem; }
+
+  /* Footer */
+  .footer-top { grid-template-columns:1fr; gap:2rem; }
+
+  /* Process */
+  .process-track { grid-template-columns:1fr 1fr; gap:2rem; }
+  .process-track::before { display:none; }
+
+  /* Video */
+  .local-video-wrap { max-width:100%; }
+  .local-video-wrap video { max-height:60vh; }
+
+  /* Services head: stack */
+  .services-head { flex-direction:column; align-items:flex-start; gap:1rem; }
+  .services-head .lead { max-width:100%; }
+}
+
+/* ── Móvil (≤640px) ── */
+@media (max-width:640px) {
+  /* Nav */
+  .logo img { height:42px; }
+
+  /* Hero */
+  #hero { padding:7rem 5% 5rem; }
+  #hero h1 { font-size: clamp(2.4rem, 9vw, 5.4rem); }
+  .hero-ctas { flex-direction:column; align-items:center; }
+  .hero-ctas .btn-main,
+  .hero-ctas .btn-ghost { width:100%; max-width:320px; justify-content:center; }
+  .scroll-hint { display:none; }
+
+  /* Secciones */
+  #about, #services, #process, #gallery,
+  #testimonials, #contact, #video-section {
+    padding: 5rem 5%;
+  }
+
+  /* About */
+  .about-card-main { height:280px; }
+  .about-badge { display:none; }
+  .about-pillars { grid-template-columns:1fr; gap:.8rem; }
+
+  /* Services */
+  .services-grid { grid-template-columns:1fr; }
+
+  /* Process */
+  .process-track { grid-template-columns:1fr; gap:1.5rem; }
+  .step-circle { width:52px; height:52px; font-size:1rem; }
+
+  /* Gallery */
+  .gallery-grid {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+  }
+  .gal-item { height:220px; }
+
+  /* Testimonials */
+  .test-grid { grid-template-columns:1fr !important; }
+  .test-slider-wrap { max-width:100%; }
+  .test-slide { flex: 0 0 calc(100vw - 10%); max-width:320px; }
+  .test-slide.wide { flex: 0 0 calc(100vw - 10%); max-width:360px; }
+
+  /* Contact / Formulario */
+  .form-row { grid-template-columns:1fr; }
+  .form-box { padding:2rem 1.5rem; }
+
+  /* Video */
+  .local-video-wrap video { max-height:50vh; }
+  .video-badge-row { flex-direction:column; align-items:center; gap:.7rem; }
+
+  /* Footer */
+  .footer-brand .logo-ft img { height:50px; }
+  .footer-top { padding-bottom:2rem; margin-bottom:2rem; }
+}
+
+/* ─────────────────────────────────────────
+   WA FLOAT
+───────────────────────────────────────── */
+.wa-fab {
+  position: fixed;
+  bottom: 2rem; right: 2rem;
+  z-index: 999;
+  width: 72px; height: 72px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  text-decoration: none;
+  box-shadow: 0 8px 28px rgba(37,211,102,.55);
+  transition: transform .2s, box-shadow .2s;
+  animation: fabPulse 2.5s ease infinite;
+}
+.wa-fab:hover { transform:scale(1.12); box-shadow:0 12px 40px rgba(37,211,102,.65); }
+@keyframes fabPulse {
+  0%,100% { box-shadow: 0 8px 28px rgba(37,211,102,.55), 0 0 0 0 rgba(37,211,102,.3); }
+  50%      { box-shadow: 0 8px 28px rgba(37,211,102,.55), 0 0 0 18px rgba(37,211,102,0); }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ─────────────────────────────── -->
+<nav id="nav">
+  <a href="#" class="logo"><img src="img_logo.png" alt="Pachy Limpieza Profesional"></a>
+  <ul class="nav-links">
+    <li><a href="#about">Nosotros</a></li>
+    <li><a href="#services">Servicios</a></li>
+    <li><a href="#process">Proceso</a></li>
+    <li><a href="#testimonials">Clientes</a></li>
+    <li><a href="#contact" class="nav-btn">Cotizar gratis</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Mobile overlay -->
+<div class="nav-overlay" id="navOverlay">
+  <button class="nav-close" onclick="toggleMenu()">✕</button>
+  <a href="#about" onclick="toggleMenu()">Nosotros</a>
+  <a href="#services" onclick="toggleMenu()">Servicios</a>
+  <a href="#process" onclick="toggleMenu()">Proceso</a>
+  <a href="#testimonials" onclick="toggleMenu()">Clientes</a>
+  <a href="#contact" onclick="toggleMenu()" style="color:var(--orange)">Cotizar gratis</a>
+</div>
+
+<!-- ── HERO ─────────────────────────────── -->
+<section id="hero">
+  <div class="geo geo-1"></div>
+  <div class="geo geo-2"></div>
+  <div class="geo geo-3"></div>
+  <div class="particles" id="particles"></div>
+
+  <div class="hero-inner">
+    <div class="hero-chip"><span></span> Limpieza Profesional · Quito, Ecuador</div>
+    <h1>Tu espacio merece estar <em>impecable</em></h1>
+    <p>Pachy transforma hogares, oficinas y negocios de toda la ciudad con equipo certificado, productos especializados y resultados que se notan desde el primer servicio.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-main">Solicitar cotización →</a>
+      <a href="https://wa.me/593984681838" target="_blank" class="btn-ghost">💬 WhatsApp</a>
+    </div>
+  </div>
+  <div class="bubbles-wrap" id="heroBubbles"></div>
+
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- ── ABOUT ─────────────────────────────── -->
+<section id="about">
+  <div class="section-wrap">
+    <div class="about-grid">
+      <div class="about-visual reveal left">
+        <div class="about-card-main">
+          <img src="img_equipo.jpeg" alt="Equipo profesional Pachy">
+          <div class="about-card-tag">🏆 Equipo certificado Pachy</div>
+        </div>
+        <div class="about-badge reveal d2">
+          <strong>+5</strong>
+          <span>Años en Quito</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <p class="eyebrow reveal">Quiénes Somos</p>
+        <h2 class="headline reveal d1">Expertos que <em>transforman</em> cada espacio</h2>
+        <p class="lead reveal d2">Pachy es una empresa profesional de limpieza con base en San Martín, sur de Quito. Nuestro equipo está capacitado, equipado con herramientas especializadas y comprometido con entregar resultados de alto estándar en hogares, oficinas, locales e industrias de toda la ciudad.</p>
+        <div class="about-pillars">
+          <div class="pillar reveal d2">
+            <div class="pillar-ico">🎯</div>
+            <h4>Misión</h4>
+            <p>Mejorar la calidad de vida de nuestros clientes con servicios de limpieza de alta calidad.</p>
+          </div>
+          <div class="pillar reveal d3">
+            <div class="pillar-ico">🚀</div>
+            <h4>Visión</h4>
+            <p>Ser la empresa de limpieza más confiable y reconocida en todo Quito.</p>
+          </div>
+          <div class="pillar reveal d4">
+            <div class="pillar-ico">💎</div>
+            <h4>Valores</h4>
+            <p>Responsabilidad, puntualidad y excelencia en cada trabajo.</p>
+          </div>
+        </div>
+        <div class="about-workers reveal d3">
+          <div class="worker-card">
+            <img src="img_cocina.jpeg" alt="Servicio de limpieza en hogares Pachy">
+            <div class="worker-card-label">Limpieza de Hogares</div>
+          </div>
+          <div class="worker-card">
+            <img src="img_maquina.jpg" alt="Limpieza industrial Pachy">
+            <div class="worker-card-label">Limpieza Industrial</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES ─────────────────────────── -->
+<section id="services">
+  <div class="section-wrap">
+    <div class="services-head">
+      <div>
+        <p class="eyebrow reveal">Nuestros Servicios</p>
+        <h2 class="headline reveal d1">Lo que necesitas,<br><em>lo hacemos nosotros</em></h2>
+      </div>
+      <p class="lead reveal right">Soluciones de limpieza profesional adaptadas a cada espacio y necesidad en Quito.</p>
+    </div>
+    <div class="services-grid">
+      <div class="svc-card reveal d1">
+        <div class="svc-ico">🏠</div>
+        <h3>Casas y Departamentos</h3>
+        <p>Limpieza profunda de hogares, cada rincón reluciente con productos certificados.</p>
+        <a href="https://wa.me/593984681838?text=Cotizar+limpieza+de+casa" class="svc-link" target="_blank">Cotizar →</a>
+      </div>
+      <div class="svc-card reveal d2">
+        <div class="svc-ico">🏢</div>
+        <h3>Oficinas y Empresas</h3>
+        <p>Ambientes de trabajo impecables y productivos para tu equipo.</p>
+        <a href="https://wa.me/593984681838?text=Cotizar+limpieza+de+oficina" class="svc-link" target="_blank">Cotizar →</a>
+      </div>
+      <div class="svc-card reveal d3">
+        <div class="svc-ico">🏭</div>
+        <h3>Limpieza Industrial</h3>
+        <p>Maquinaria especializada para plantas, bodegas y espacios industriales de gran escala.</p>
+        <a href="https://wa.me/593984681838?text=Cotizar+limpieza+industrial" class="svc-link" target="_blank">Cotizar →</a>
+      </div>
+      <div class="svc-card reveal d1">
+        <div class="svc-ico">🏗️</div>
+        <h3>Post-Construcción</h3>
+        <p>Retiro de polvo, escombros y residuos después de obra o remodelación.</p>
+        <a href="https://wa.me/593984681838?text=Cotizar+limpieza+post-obra" class="svc-link" target="_blank">Cotizar →</a>
+      </div>
+      <div class="svc-card reveal d2">
+        <div class="svc-ico">🪟</div>
+        <h3>Vidrios y Ventanas</h3>
+        <p>Cristales brillantes sin manchas hasta 2 pisos de altura con equipo especializado.</p>
+        <a href="https://wa.me/593984681838?text=Cotizar+limpieza+de+vidrios" class="svc-link" target="_blank">Cotizar →</a>
+      </div>
+      <div class="svc-card reveal d3">
+        <div class="svc-ico">🅿️</div>
+        <h3>Patios, Veredas y Parqueaderos</h3>
+        <p>Limpieza de áreas exteriores, jardines, parqueaderos y veredas con presión de agua.</p>
+        <a href="https://wa.me/593984681838?text=Cotizar+limpieza+de+patios" class="svc-link" target="_blank">Cotizar →</a>
+      </div>
+      <div class="svc-card reveal d1">
+        <div class="svc-ico">🪜</div>
+        <h3>Gradas y Áreas Comunes</h3>
+        <p>Limpieza profunda de escaleras, pasillos y zonas comunes de edificios y conjuntos.</p>
+        <a href="https://wa.me/593984681838?text=Cotizar+limpieza+de+gradas" class="svc-link" target="_blank">Cotizar →</a>
+      </div>
+      <div class="svc-card reveal d2">
+        <div class="svc-ico">📦</div>
+        <h3>Mudanzas</h3>
+        <p>Dejamos el espacio listo antes o después de tu mudanza, sin preocupaciones.</p>
+        <a href="https://wa.me/593984681838?text=Cotizar+limpieza+de+mudanza" class="svc-link" target="_blank">Cotizar →</a>
+      </div>
+      <div class="svc-card reveal d3">
+        <div class="svc-ico">🛋️</div>
+        <h3>Muebles y Tapicería</h3>
+        <p>Sofás, sillas y colchones tratados con equipos de extracción profesional.</p>
+        <a href="https://wa.me/593984681838?text=Cotizar+limpieza+de+muebles" class="svc-link" target="_blank">Cotizar →</a>
+      </div>
+      <div class="svc-card reveal d1">
+        <div class="svc-ico">🏪</div>
+        <h3>Locales Comerciales</h3>
+        <p>Tu negocio siempre presentable y listo para recibir clientes cada día.</p>
+        <a href="https://wa.me/593984681838?text=Cotizar+limpieza+de+local" class="svc-link" target="_blank">Cotizar →</a>
+      </div>
+      <div class="svc-card reveal d2">
+        <div class="svc-ico">🧺</div>
+        <h3>Alfombras y Tapetes</h3>
+        <p>Eliminamos manchas, polvo y ácaros con equipos de lavado profesional.</p>
+        <a href="https://wa.me/593984681838?text=Cotizar+limpieza+de+alfombras" class="svc-link" target="_blank">Cotizar →</a>
+      </div>
+      <div class="svc-card reveal d3">
+        <div class="svc-ico">⏱️</div>
+        <h3>Limpieza por Horas</h3>
+        <p>Servicio flexible adaptado exactamente a tu tiempo y presupuesto.</p>
+        <a href="https://wa.me/593984681838?text=Cotizar+limpieza+por+horas" class="svc-link" target="_blank">Cotizar →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROCESS ───────────────────────────── -->
+<section id="process">
+  <div class="section-wrap">
+    <div class="process-head">
+      <p class="eyebrow reveal" style="justify-content:center; color:rgba(255,255,255,.6)">Cómo Funciona</p>
+      <h2 class="headline light reveal d1">Simple, rápido y <em>sin complicaciones</em></h2>
+      <p class="lead reveal d2">En 5 pasos tu espacio queda completamente transformado.</p>
+    </div>
+    <div class="process-track">
+      <div class="step reveal d1">
+        <div class="step-circle">01</div>
+        <h4>Solicitas</h4>
+        <p>Contáctanos por WhatsApp o formulario web.</p>
+      </div>
+      <div class="step reveal d2">
+        <div class="step-circle">02</div>
+        <h4>Analizamos</h4>
+        <p>Evaluamos y enviamos cotización sin costo.</p>
+      </div>
+      <div class="step reveal d3">
+        <div class="step-circle">03</div>
+        <h4>Agendamos</h4>
+        <p>Coordinamos día y hora según tu disponibilidad.</p>
+      </div>
+      <div class="step reveal d4">
+        <div class="step-circle">04</div>
+        <h4>Limpiamos</h4>
+        <p>Nuestro equipo realiza el trabajo con excelencia.</p>
+      </div>
+      <div class="step reveal d5">
+        <div class="step-circle">05</div>
+        <h4>¡Listo!</h4>
+        <p>Tu espacio transformado, brillante y reluciente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── VIDEO ─────────────────────────────── -->
+<section id="video-section">
+  <div class="bubbles-wrap" id="videoBubbles"></div>
+  <div class="section-wrap" style="position:relative;z-index:2;">
+    <div style="text-align:center; margin-bottom:2.5rem;">
+      <p class="eyebrow reveal" style="justify-content:center; color:rgba(255,255,255,.6)">Conócenos</p>
+      <h2 class="headline light reveal d1">El equipo detrás de cada <em>espacio impecable</em></h2>
+      <p class="lead reveal d2" style="color:rgba(255,255,255,.55); max-width:520px; margin:1rem auto 0;">
+        Mira a Pachy en acción: equipo profesional, resultados reales y el compromiso que nos diferencia en Quito.
+      </p>
+    </div>
+    <div class="local-video-wrap reveal scale">
+      <video
+        controls
+        playsinline
+        preload="metadata"
+        poster="img_equipo.jpeg">
+        <source src="video_pachy.mp4" type="video/mp4">
+        Tu navegador no soporta video HTML5.
+      </video>
+    </div>
+    <div class="video-badge-row reveal d2" style="justify-content:center; margin-top:2rem;">
+      <span class="vbadge">🏆 Equipo certificado</span>
+      <span class="vbadge">📍 Toda Quito</span>
+      <span class="vbadge">⭐ 5 estrellas</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── GALLERY ───────────────────────────── -->
+<section id="gallery">
+  <div class="section-wrap">
+    <div class="gallery-head">
+      <p class="eyebrow reveal">Galería</p>
+      <h2 class="headline reveal d1">Nuestro equipo en <em>acción</em></h2>
+    </div>
+    <div class="gallery-grid" style="grid-template-columns:2fr 1fr 1fr; grid-template-rows:250px 250px 250px;">
+      <div class="gal-item reveal d1" style="grid-row:span 2;">
+        <img src="img_equipo.jpeg" alt="Equipo Pachy">
+        <div class="gal-label">Nuestro Equipo Profesional</div>
+      </div>
+      <div class="gal-item reveal d2">
+        <img src="img_galpon1.jpeg" alt="Limpieza de galpones">
+        <div class="gal-label">Limpieza Industrial</div>
+      </div>
+      <div class="gal-item reveal d3">
+        <img src="img_galpon2.jpeg" alt="Resultados limpieza">
+        <div class="gal-label">Resultados Garantizados</div>
+      </div>
+      <div class="gal-item reveal d2">
+        <img src="img_maquina.jpg" alt="Limpieza con maquinaria">
+        <div class="gal-label">Maquinaria Especializada</div>
+      </div>
+      <div class="gal-item reveal d3">
+        <img src="img_galpon3.jpeg" alt="Limpieza de galpones en altura">
+        <div class="gal-label">Galpones — Trabajo en Altura</div>
+      </div>
+      <div class="gal-item reveal d1">
+        <img src="img_gradas.jpg" alt="Limpieza de gradas">
+        <div class="gal-label">Gradas y Áreas Comunes</div>
+      </div>
+      <div class="gal-item reveal d2">
+        <img src="img_cocina.jpeg" alt="Limpieza de hogares">
+        <div class="gal-label">Hogares y Departamentos</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ─────────────────────── -->
+<section id="testimonials">
+  <div class="section-wrap">
+    <div class="test-head">
+      <p class="eyebrow reveal" style="justify-content:center">Testimonios</p>
+      <h2 class="headline reveal d1">Clientes que <em>confían en Pachy</em></h2>
+    </div>
+    <div class="test-slider-wrap reveal">
+      <div class="test-slider-track" id="testTrack">
+        <div class="test-slide wide">
+          <img src="img_mascota.jpg" alt="Conoce a nuestros clientes felices">
+        </div>
+        <div class="test-slide">
+          <img src="img_chat.jpg" alt="Testimonio cliente Jorge">
+        </div>
+        <div class="test-slide">
+          <img src="img_chat2.jpg" alt="Testimonio cliente satisfecho">
+        </div>
+        <div class="test-slide">
+          <img src="img_chat3.jpg" alt="Testimonio cliente — Muy buen servicio">
+        </div>
+        <div class="test-slide">
+          <img src="img_chat4.jpg" alt="Testimonio cliente — Perfecto todo limpio">
+        </div>
+      </div>
+      <div class="slider-arrows">
+        <button class="slider-arrow" onclick="slideTests(-1)">‹</button>
+        <button class="slider-arrow" onclick="slideTests(1)">›</button>
+      </div>
+      <div class="slider-dots" id="testDots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ───────────────────────────── -->
+<section id="contact">
+  <div class="section-wrap">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p class="eyebrow reveal">Contáctanos</p>
+        <h2 class="headline reveal d1">¿Listo para un espacio <em>impecable?</em></h2>
+        <p class="lead reveal d2">Escríbenos o llena el formulario y te enviamos una cotización sin costo en menos de 1 hora.</p>
+        <div class="info-rows reveal d2">
+          <div class="info-row">
+            <div class="info-ico">📱</div>
+            <div>
+              <strong>WhatsApp / Teléfono</strong>
+              <span>0984 681 838 — Gabriela</span>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-ico">📍</div>
+            <div>
+              <strong>Ubicación base</strong>
+              <span>San Martín, Sur de Quito</span>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-ico">🌆</div>
+            <div>
+              <strong>Cobertura</strong>
+              <span>Toda la ciudad de Quito</span>
+            </div>
+          </div>
+        </div>
+        <a href="https://wa.me/593984681838?text=Hola+Pachy!+quiero+una+cotizacion" target="_blank" class="wa-cta reveal d3">
+          💬 Escribir por WhatsApp ahora
+        </a>
+      </div>
+
+      <form class="form-box reveal right" id="contactForm" action="https://formsubmit.co/ecua.deepclean@gmail.com" method="POST" onsubmit="return handleForm(event)">
+        <h3>Cotización gratis</h3>
+        <p class="sub">Te respondemos en menos de 1 hora.</p>
+        <div class="form-row">
+          <div class="fg"><label>Nombre</label><input type="text" placeholder="Tu nombre"></div>
+          <div class="fg"><label>Teléfono</label><input type="tel" placeholder="09XX XXX XXX"></div>
+        </div>
+        <div class="fg"><label>Correo</label><input type="email" placeholder="tu@correo.com"></div>
+        <div class="fg">
+          <label>Servicio</label>
+          <select>
+            <option value="">Selecciona un servicio…</option>
+            <option>Casa / Departamento</option>
+            <option>Oficina / Empresa</option>
+            <option>Limpieza Industrial</option>
+            <option>Post-Construcción</option>
+            <option>Mudanza</option>
+            <option>Local Comercial</option>
+            <option>Muebles / Tapicería</option>
+            <option>Vidrios (hasta 2 pisos)</option>
+            <option>Patios, Veredas y Parqueaderos</option>
+            <option>Gradas y Áreas Comunes</option>
+            <option>Alfombras</option>
+            <option>Por Horas</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>Tamaño del espacio</label>
+          <select>
+            <option value="">Selecciona…</option>
+            <option>Pequeño – hasta 50m²</option>
+            <option>Mediano – 50 a 100m²</option>
+            <option>Grande – más de 100m²</option>
+            <option>Empresa / Local / Industrial</option>
+          </select>
+        </div>
+        <div class="fg"><label>Mensaje</label><textarea placeholder="Cuéntanos más sobre lo que necesitas…"></textarea></div>
+        <input type="hidden" name="_subject" value="Nueva cotización desde pachy.ec">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="box">
+        <input type="hidden" name="_next" value="https://pachy.ec/gracias.html">
+        <button type="submit" class="submit-btn">Solicitar cotización gratis →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ────────────────────────────── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="logo-ft"><img src="img_logo.png" alt="Pachy"></span>
+      <p>Empresa profesional de limpieza en Quito. Transformamos espacios con calidad, puntualidad y compromiso en toda la ciudad.</p>
+      <div class="socials">
+        <a href="#" class="soc">📘</a>
+        <a href="#" class="soc">📸</a>
+        <a href="https://wa.me/593984681838" target="_blank" class="soc">💬</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Servicios</h5>
+      <ul>
+        <li><a href="#services">Casas y Departamentos</a></li>
+        <li><a href="#services">Oficinas y Empresas</a></li>
+        <li><a href="#services">Limpieza Industrial</a></li>
+        <li><a href="#services">Post-Construcción</a></li>
+        <li><a href="#services">Patios y Parqueaderos</a></li>
+        <li><a href="#services">Gradas y Áreas Comunes</a></li>
+        <li><a href="#services">Muebles, Vidrios y más</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contacto</h5>
+      <ul>
+        <li><a href="#">📍 San Martín, Sur de Quito</a></li>
+        <li><a href="tel:0984681838">📞 0984 681 838</a></li>
+        <li><a href="https://wa.me/593984681838">💬 WhatsApp</a></li>
+        <li><a href="#contact">📋 Cotización gratis</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2026 Pachy · Servicios de Limpieza Profesional · Quito, Ecuador &nbsp;·&nbsp; Diseñado por <strong>Innovartis</strong>
+  </div>
+</footer>
+
+<!-- ── WA FLOAT ──────────────────────────── -->
+<a href="https://wa.me/593984681838?text=Hola+Pachy!+quiero+cotizar" target="_blank" class="wa-fab" title="WhatsApp">
+  <svg viewBox="0 0 32 32" width="36" height="36" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.833.744 5.493 2.043 7.8L.057 31.09a1 1 0 0 0 1.23 1.23l7.404-1.988A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 0 1-6.779-1.856l-.485-.288-4.99 1.34 1.34-4.876-.317-.504A13.27 13.27 0 0 1 2.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.293-9.98c-.4-.2-2.368-1.168-2.735-1.302-.366-.133-.633-.2-.9.2-.267.4-1.033 1.302-1.267 1.568-.233.267-.466.3-.866.1-.4-.2-1.69-.623-3.22-1.987-1.19-1.063-1.993-2.375-2.227-2.775-.233-.4-.025-.616.175-.815.18-.179.4-.466.6-.7.2-.233.267-.4.4-.666.133-.267.067-.5-.033-.7-.1-.2-.9-2.168-1.233-2.968-.325-.78-.655-.675-.9-.687l-.767-.013c-.267 0-.7.1-1.067.5-.366.4-1.4 1.368-1.4 3.336s1.433 3.87 1.633 4.136c.2.267 2.82 4.307 6.83 6.04.955.413 1.7.66 2.283.843.958.306 1.831.263 2.52.16.768-.115 2.368-.968 2.702-1.903.333-.934.333-1.735.233-1.902-.1-.166-.366-.266-.766-.466z"/></svg>
+</a>
+
+<!-- ── SCRIPTS ───────────────────────────── -->
+<script>
+/* Navbar */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+/* Mobile menu */
+function toggleMenu() {
+  document.getElementById('hamburger').classList.toggle('open');
+  document.getElementById('navOverlay').classList.toggle('open');
+}
+
+/* Scroll reveal */
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+revealEls.forEach(el => io.observe(el));
+
+/* Particles (hero) */
+(function() {
+  const container = document.getElementById('particles');
+  if (!container) return;
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.width = p.style.height = (Math.random() * 3 + 2) + 'px';
+    p.style.animationDuration = (Math.random() * 12 + 8) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    p.style.opacity = Math.random() * 0.6 + 0.2;
+    container.appendChild(p);
+  }
+})();
+
+/* Soap bubbles generator */
+function createBubbles(containerId, count) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  for (let i = 0; i < count; i++) {
+    const b = document.createElement('div');
+    b.className = 'soap-bubble';
+    const size = Math.random() * 60 + 20;
+    b.style.width = b.style.height = size + 'px';
+    b.style.left = Math.random() * 100 + '%';
+    b.style.animationDuration = (Math.random() * 14 + 8) + 's';
+    b.style.animationDelay = (Math.random() * 12) + 's';
+    container.appendChild(b);
+  }
+}
+createBubbles('heroBubbles', 22);
+createBubbles('videoBubbles', 14);
+
+/* Testimonials slider */
+(function() {
+  const track = document.getElementById('testTrack');
+  const dotsWrap = document.getElementById('testDots');
+  if (!track) return;
+
+  const slides = track.querySelectorAll('.test-slide');
+  let current = 0;
+  let visibleCount = window.innerWidth < 640 ? 1 : window.innerWidth < 900 ? 2 : 3;
+
+  // Build dots
+  const totalPages = Math.max(1, slides.length - visibleCount + 1);
+  for (let i = 0; i < totalPages; i++) {
+    const d = document.createElement('div');
+    d.className = 'slider-dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dotsWrap.appendChild(d);
+  }
+
+  function getSlideW() {
+    if (!slides[0]) return 0;
+    return slides[0].offsetWidth + 24; // gap 1.5rem ≈ 24px
+  }
+
+  function goTo(idx) {
+    const max = Math.max(0, slides.length - visibleCount);
+    current = Math.max(0, Math.min(idx, max));
+    track.scrollTo({ left: current * getSlideW(), behavior: 'smooth' });
+    dotsWrap.querySelectorAll('.slider-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  window.slideTests = function(dir) { goTo(current + dir); };
+  window.addEventListener('resize', () => {
+    visibleCount = window.innerWidth < 640 ? 1 : window.innerWidth < 900 ? 2 : 3;
+  });
+
+  // Touch support
+  let startX = 0;
+  track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) slideTests(diff > 0 ? 1 : -1);
+  });
+})();
+
+/* Form handler — FormSubmit.co envía al correo ecua.deepclean@gmail.com */
+function handleForm(e) {
+  // FormSubmit.co envía al correo automáticamente
+  // Primera vez: llegaré un email de confirmación a ecua.deepclean@gmail.com — confirmar una sola vez
+  return true;
+}
+
+
+/* Keep enviar() for WA button */
+function enviar() {
+  const nombre = document.querySelector('input[type=text]').value || '';
+  const tel    = document.querySelector('input[type=tel]').value  || '';
+  const svc    = document.querySelectorAll('select')[0].value     || '';
+  let msg = `Hola Pachy! Quiero una cotización.%0A`;
+  if (nombre) msg += `Nombre: ${nombre}%0A`;
+  if (tel)    msg += `Teléfono: ${tel}%0A`;
+  if (svc)    msg += `Servicio: ${svc}`;
+  window.open(`https://wa.me/593984681838?text=${msg}`, '_blank');
+}
+</script>
+</body>
+</html>
