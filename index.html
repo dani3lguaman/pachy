@@ -464,6 +464,42 @@ nav.scrolled .hamburger span { background: var(--dark); }
   background: #000;
   border: 2px solid rgba(255,255,255,.1);
 }
+.video-thumb-link {
+  display: block;
+  position: relative;
+  text-decoration: none;
+}
+.video-thumb-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 75vh;
+  object-fit: cover;
+  transition: filter .3s;
+}
+.video-thumb-link:hover .video-thumb-img { filter: brightness(.75); }
+.video-play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform .2s;
+}
+.video-thumb-link:hover .video-play-btn { transform: translate(-50%, -50%) scale(1.12); }
+.video-thumb-label {
+  position: absolute;
+  bottom: 1.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,.65);
+  color: #fff;
+  font-weight: 700;
+  font-size: .9rem;
+  padding: .4rem 1.1rem;
+  border-radius: 50px;
+  white-space: nowrap;
+  letter-spacing: .02em;
+}
 .local-video-wrap video {
   width: 100%;
   height: auto;
@@ -1610,14 +1646,16 @@ footer {
       </p>
     </div>
     <div class="local-video-wrap reveal scale">
-      <iframe
-        src="https://www.youtube.com/embed/UtRRa1auXhs"
-        title="Pachy Limpieza Profesional"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-        style="width:100%; aspect-ratio:9/16; border-radius:var(--radius); max-height:520px;">
-      </iframe>
+      <a href="https://youtube.com/shorts/UtRRa1auXhs" target="_blank" rel="noopener" class="video-thumb-link">
+        <img src="img_equipo.jpeg" alt="Ver video de Pachy en YouTube" class="video-thumb-img">
+        <span class="video-play-btn">
+          <svg viewBox="0 0 80 80" width="80" height="80" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="40" r="40" fill="rgba(0,0,0,0.55)"/>
+            <polygon points="32,24 32,56 58,40" fill="white"/>
+          </svg>
+        </span>
+        <span class="video-thumb-label">▶ Ver video en YouTube</span>
+      </a>
     </div>
     <div class="video-badge-row reveal d2" style="justify-content:center; margin-top:2rem;">
       <span class="vbadge">🏆 Equipo certificado</span>
